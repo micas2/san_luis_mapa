@@ -1,0 +1,163 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { TransformComponent } from 'react-zoom-pan-pinch';
+import { useStore } from '../store/useStore';
+
+export default function MapCanvas() {
+  const lotsData = useStore(state => state.lotsData);
+  const selectedLotId = useStore(state => state.selectedLotId);
+  const setSelectedLotId = useStore(state => state.setSelectedLotId);
+  
+  const [svgContent, setSvgContent] = useState('');
+  const svgContainerRef = useRef(null);
+  const clipPathIdRef = useRef(0);
+
+  useEffect(() => {
+    fetch('/mapa_svg.svg')
+      .then(res => res.text())
+      .then(text => setSvgContent(text))
+      .catch(err => console.error("Error loading SVG", err));
+  }, []);
+
+  useEffect(() => {
+    if (!svgContainerRef.current) return;
+    const svgEl = svgContainerRef.current.querySelector('svg');
+    if (!svgEl) return;
+    
+    svgEl.style.width = "1516px";
+    svgEl.style.height = "909px";
+    svgEl.setAttribute('width', '1516');
+    svgEl.setAttribute('height', '909');
+    
+    const overlays = Array.from(svgEl.querySelectorAll('rect, image, use'));
+    overlays.forEach(el => el.style.pointerEvents = 'none');
+    
+    const numeroManzanaGroups = Array.from(svgEl.querySelectorAll('g[id*="numero de manzana" i], g[id*="números de manzanas" i]'));
+    numeroManzanaGroups.forEach(group => {
+      const textsParams = group.querySelectorAll('path, text, rect, circle, ellipse');
+      textsParams.forEach(child => {
+        child.style.stroke = 'none';
+        child.style.strokeWidth = '0';
+      });
+    });
+
+    // Clean up old clipPaths and stroke paths from previous renders
+    svgEl.querySelectorAll('clipPath.selection-clip').forEach(el => el.remove());
+    svgEl.querySelectorAll('path.selection-stroke').forEach(el => el.remove());
+
+    const lotGroups = Array.from(svgEl.querySelectorAll('g[id]')).filter(g => /^lotes\/M\d+_L\d+\//i.test(g.id));
+    
+    lotGroups.forEach(group => {
+      const fullId = group.id;
+      const lotIdMatch = fullId.match(/M\d+_L\d+/i);
+      const lotId = lotIdMatch ? lotIdMatch[0] : fullId;
+      const paths = Array.from(group.querySelectorAll('path'));
+      if (!paths.length) return;
+
+      const dbLot = lotsData.find(l => (l.ID === lotId || l.id === lotId));
+      const uso = dbLot?.Uso?.toLowerCase() || dbLot?.uso?.toLowerCase() || '';
+      const usoColors = {
+        residencia: { outer: '#D6D8EA', inner: '#B0B6D5', number: '#3F3F40' },
+        mixto: { outer: '#E2D6BE', inner: '#C0B391', number: '#3F3F40' },
+        comercial: { outer: '#BCA89A', inner: '#9A8B7A', number: '#3F3F40' },
+        institucional: { outer: '#C4C0C0', inner: '#E4E4E4', number: '#3F3F40' },
+      };
+
+      const estadoColors = {
+        vendida: { outer: '#888888', inner: '#6A6A6A', number: '#FFFFFF' }, // Gris oscuro
+        bloqueada: { outer: '#D3D3D3', inner: '#BDBDBD', number: '#555555' }, // Gris claro
+        'no disponible': { outer: '#D3D3D3', inner: '#BDBDBD', number: '#555555' }, // Gris claro
+      };
+
+      // Limpieza de valor estado
+      const st = (dbLot?.Estado?.toLowerCase() || dbLot?.estado?.toLowerCase() || 'disponible').trim();
+      const stNormalized = st === 'vendido' ? 'vendida' : st;
+
+      // Color predominante es el estado, si no existe o es "disponible", usa el color base de uso
+      let colors;
+      if (estadoColors[stNormalized]) {
+        colors = estadoColors[stNormalized];
+      } else {
+        colors = usoColors[uso] || { outer: '#C0B391', inner: '#E2D6BE', number: '#3F3F40' };
+      }
+
+      paths.forEach((path, index) => {
+        path.style.cursor = "pointer";
+        path.setAttribute('role', 'button');
+        path.setAttribute('tabindex', '0');
+
+        const isOuter = index === 0;
+        const isInner = index === 1;
+        const isNumber = index > 1;
+
+        if (isOuter) {
+          path.style.fill = colors.outer;
+        } 
+        else if (isInner) {
+          path.style.fill = colors.inner;
+        } 
+        else if (isNumber) {
+          path.style.fill = colors.number;
+        }
+
+        // Selection border: inside stroke via clipPath
+        if (isOuter && selectedLotId === lotId) {
+          const d = path.getAttribute('d');
+          if (!d) return;
+
+          const clipId = `sel-clip-${clipPathIdRef.current++}`;
+          
+          let defs = svgEl.querySelector('defs');
+          if (!defs) {
+            defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            svgEl.insertBefore(defs, svgEl.firstChild);
+          }
+          
+          const clipPath = document.createElementNS('http://www.w3.org/2000/svg', 'clipPath');
+          clipPath.setAttribute('id', clipId);
+          clipPath.classList.add('selection-clip');
+          const clipPathInner = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          clipPathInner.setAttribute('d', d);
+          clipPath.appendChild(clipPathInner);
+          defs.appendChild(clipPath);
+
+          const strokePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          strokePath.classList.add('selection-stroke');
+          strokePath.setAttribute('d', d);
+          strokePath.setAttribute('fill', 'none');
+          strokePath.setAttribute('stroke', '#2F2F31');
+          strokePath.setAttribute('stroke-width', '6');
+          strokePath.setAttribute('clip-path', `url(#${clipId})`);
+          strokePath.style.pointerEvents = 'none';
+          group.appendChild(strokePath);
+        }
+      });
+    });
+  }, [lotsData, selectedLotId, svgContent]);
+
+  const handleSvgClick = (e) => {
+    let target = e.target;
+    if (!svgContainerRef.current || !svgContainerRef.current.contains(target)) return;
+
+    const lotGroup = target.closest('g[id]');
+    if (lotGroup && /^lotes\/M\d+_L\d+\//i.test(lotGroup.id)) {
+      const match = lotGroup.id.match(/M\d+_L\d+/i);
+      if (match) {
+        setSelectedLotId(match[0]);
+        return;
+      }
+    }
+    
+    setSelectedLotId(null);
+  };
+
+  return (
+    <TransformComponent wrapperStyle={{ width: "100%", height: "100%" }}>
+      <div 
+        ref={svgContainerRef}
+        onClick={handleSvgClick}
+        className="w-[1516px] h-[909px] pointer-events-auto shrink-0 flex items-center justify-center p-0 m-0"
+        dangerouslySetInnerHTML={{ __html: svgContent }} 
+      />
+    </TransformComponent>
+  );
+}

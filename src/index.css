@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-azul1: #0DACB5;
+  --color-azul4: #005A62;
+  --color-dark-grey: #2F2F31;
+  --color-dark-grey-alpha: rgba(47, 47, 49, 0.86);
+  --color-bage-dark: #C0B391;
+  --color-celeste-dark: #B0B6D5;
+  --color-tierra-dark: #A48671;
+  --color-gris-dark: #6C6C6C;
+  --font-cocomat: "Cocomat Pro", sans-serif;
+  --font-nexa: "Nexa", sans-serif;
+  --font-antonio: "Antonio", sans-serif;
+  --font-open-sans-cond: "Open Sans Condensed", sans-serif;
+}
+
+@layer base {
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-nexa);
+    color: #2f2f31;
+    background-color: white;
+    overflow: hidden;
+  }
+}
