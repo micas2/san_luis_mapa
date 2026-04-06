@@ -51,16 +51,16 @@ export default function Tutorial() {
       {/* Bottom Area - Very Dark */}
       <div className="bg-[#191919] flex-1 flex flex-col items-center justify-center py-6 px-4 relative min-h-[160px] md:min-h-[180px]">
          <div className="brightness-0 invert opacity-90 mb-4">
-           <Logo width="w-20 md:w-28 lg:w-32" />
+           <Logo width="w-16 md:w-14 lg:w-16" />
          </div>
+         
+         {/* Logo Proyecto Norte - Acoplado al bloque gris */}
+         <img 
+           src="/logo_proyecto_norte.svg" 
+           alt="Proyecto Norte" 
+           className="absolute bottom-4 right-6 w-20 md:w-22 lg:w-35 z-50 pointer-events-none opacity-90" 
+         />
       </div>
-      
-      {/* Logo Proyecto Norte */}
-      <img 
-        src="/logo_proyecto_norte.svg" 
-        alt="Proyecto Norte" 
-        className="fixed bottom-0 right-0 w-32 md:w-44 z-50 pointer-events-none" 
-      />
     </div>
   );
 }
