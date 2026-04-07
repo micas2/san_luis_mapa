@@ -10,41 +10,41 @@ export default function BottomMenu() {
     <div className="bg-dark-grey shadow-[0_-10px_40px_rgba(0,0,0,0.3)] px-2 sm:px-4 py-1.5 sm:py-3 md:py-3 lg:py-4 flex flex-row items-center justify-between gap-1 sm:gap-3 md:gap-6 pointer-events-auto border-t border-white/5 overflow-hidden">
        
        {/* References - single row always */}
-       <div className="flex flex-row items-center gap-1.5 sm:gap-2 md:gap-4 min-w-0 flex-1">
+       <div className="flex flex-row items-center gap-2 sm:gap-2 md:gap-4 min-w-0 flex-1">
           
           <div className="flex flex-col items-center gap-0.5 shrink-0">
-             <div className="bg-white flex items-center justify-center rounded-[2px] w-[16px] h-[10px] sm:w-[24px] sm:h-[14px] md:w-[28px] md:h-[18px]">
-                <div className="w-[5px] h-[5px] sm:w-[8px] sm:h-[8px] md:w-[10px] md:h-[10px] rounded-full bg-[#B0B6D5]" />
+             <div className="bg-white flex items-center justify-center rounded-[2px] w-[20px] h-[12px] sm:w-[24px] sm:h-[14px] md:w-[28px] md:h-[18px]">
+                <div className="w-[7px] h-[7px] sm:w-[8px] sm:h-[8px] md:w-[10px] md:h-[10px] rounded-full bg-[#B0B6D5]" />
              </div>
-             <span className="text-[5px] sm:text-[7px] md:text-[9px] lg:text-[11px] font-bold text-white font-open-sans-cond tracking-tighter leading-none whitespace-nowrap">RESIDENCIAL</span>
+             <span className="text-[6px] sm:text-[7px] md:text-[9px] lg:text-[11px] font-bold text-white font-open-sans-cond tracking-tighter leading-none whitespace-nowrap">RESIDENCIAL</span>
           </div>
 
           <div className="flex flex-col items-center gap-0.5 shrink-0">
-             <div className="bg-white flex items-center justify-center rounded-[2px] w-[16px] h-[10px] sm:w-[24px] sm:h-[14px] md:w-[28px] md:h-[18px]">
-                <div className="w-[5px] h-[5px] sm:w-[8px] sm:h-[8px] md:w-[10px] md:h-[10px] rounded-full bg-[#C0B391]" />
+             <div className="bg-white flex items-center justify-center rounded-[2px] w-[20px] h-[12px] sm:w-[24px] sm:h-[14px] md:w-[28px] md:h-[18px]">
+                <div className="w-[7px] h-[7px] sm:w-[8px] sm:h-[8px] md:w-[10px] md:h-[10px] rounded-full bg-[#C0B391]" />
              </div>
-             <span className="text-[5px] sm:text-[7px] md:text-[9px] lg:text-[11px] font-bold text-white font-open-sans-cond tracking-tighter leading-none whitespace-nowrap">MIXTO</span>
+             <span className="text-[6px] sm:text-[7px] md:text-[9px] lg:text-[11px] font-bold text-white font-open-sans-cond tracking-tighter leading-none whitespace-nowrap">MIXTO</span>
           </div>
           
           <div className="flex flex-col items-center gap-0.5 shrink-0">
-             <div className="bg-white flex items-center justify-center rounded-[2px] w-[16px] h-[10px] sm:w-[24px] sm:h-[14px] md:w-[28px] md:h-[18px]">
-                <div className="w-[5px] h-[5px] sm:w-[8px] sm:h-[8px] md:w-[10px] md:h-[10px] rounded-full bg-[#9A8B7A]" />
+             <div className="bg-white flex items-center justify-center rounded-[2px] w-[20px] h-[12px] sm:w-[24px] sm:h-[14px] md:w-[28px] md:h-[18px]">
+                <div className="w-[7px] h-[7px] sm:w-[8px] sm:h-[8px] md:w-[10px] md:h-[10px] rounded-full bg-[#9A8B7A]" />
              </div>
-             <span className="text-[5px] sm:text-[7px] md:text-[9px] lg:text-[11px] font-bold text-white font-open-sans-cond tracking-tighter leading-none whitespace-nowrap">COMERCIAL</span>
+             <span className="text-[6px] sm:text-[7px] md:text-[9px] lg:text-[11px] font-bold text-white font-open-sans-cond tracking-tighter leading-none whitespace-nowrap">COMERCIAL</span>
           </div>
 
           <div className="flex flex-col items-center gap-0.5 shrink-0">
-             <div className="bg-white flex items-center justify-center rounded-[2px] w-[16px] h-[10px] sm:w-[24px] sm:h-[14px] md:w-[28px] md:h-[18px]">
-                <div className="w-[5px] h-[5px] sm:w-[8px] sm:h-[8px] md:w-[10px] md:h-[10px] rounded-full bg-[#888888]" />
+             <div className="bg-white flex items-center justify-center rounded-[2px] w-[20px] h-[12px] sm:w-[24px] sm:h-[14px] md:w-[28px] md:h-[18px]">
+                <div className="w-[7px] h-[7px] sm:w-[8px] sm:h-[8px] md:w-[10px] md:h-[10px] rounded-full bg-[#888888]" />
              </div>
-             <span className="text-[5px] sm:text-[7px] md:text-[9px] lg:text-[11px] font-bold text-white font-open-sans-cond tracking-tighter leading-none whitespace-nowrap">VENDIDO</span>
+             <span className="text-[6px] sm:text-[7px] md:text-[9px] lg:text-[11px] font-bold text-white font-open-sans-cond tracking-tighter leading-none whitespace-nowrap">VENDIDO</span>
           </div>
 
           <div className="flex flex-col items-center gap-0.5 shrink-0">
-             <div className="bg-white flex items-center justify-center rounded-[2px] w-[16px] h-[10px] sm:w-[24px] sm:h-[14px] md:w-[28px] md:h-[18px]">
-                <div className="w-[5px] h-[5px] sm:w-[8px] sm:h-[8px] md:w-[10px] md:h-[10px] rounded-full bg-[#D3D3D3]" />
+             <div className="bg-white flex items-center justify-center rounded-[2px] w-[20px] h-[12px] sm:w-[24px] sm:h-[14px] md:w-[28px] md:h-[18px]">
+                <div className="w-[7px] h-[7px] sm:w-[8px] sm:h-[8px] md:w-[10px] md:h-[10px] rounded-full bg-[#D3D3D3]" />
              </div>
-             <span className="text-[5px] sm:text-[7px] md:text-[9px] lg:text-[11px] font-bold text-white font-open-sans-cond tracking-tighter leading-none whitespace-nowrap">NO DISP.</span>
+             <span className="text-[6px] sm:text-[7px] md:text-[9px] lg:text-[11px] font-bold text-white font-open-sans-cond tracking-tighter leading-none whitespace-nowrap">NO DISP.</span>
           </div>
 
        </div>

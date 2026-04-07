@@ -58,7 +58,7 @@ export default function Tutorial() {
          <img 
            src="/logo_proyecto_norte.svg" 
            alt="Proyecto Norte" 
-           className="absolute bottom-2 right-2 sm:right-4 w-14 sm:w-20 md:w-22 lg:w-35 z-50 pointer-events-none opacity-90 -mr-1 -mb-1" 
+           className="absolute bottom-2 right-2 sm:right-4 w-14 sm:w-20 md:w-22 lg:w-35 z-50 pointer-events-none opacity-90" 
          />
       </div>
     </div>

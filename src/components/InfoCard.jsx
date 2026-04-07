@@ -49,7 +49,7 @@ export default function InfoCard() {
   };
 
   return (
-    <div className="w-full sm:w-[300px] md:w-[350px] bg-[#2f2f31f2] backdrop-blur-md rounded-l-[5px] sm:rounded-r-none rounded-b-none flex flex-col p-4 sm:p-5 md:p-6 pt-3 sm:pt-4 md:pt-5 pointer-events-auto border border-white/5 sm:border-r-0 animate-in fade-in zoom-in-95 duration-200">
+    <div className="w-[260px] sm:w-[300px] md:w-[350px] bg-[#2f2f31f2] backdrop-blur-md rounded-l-[5px] sm:rounded-r-none rounded-b-none flex flex-col p-4 sm:p-5 md:p-6 pt-3 sm:pt-4 md:pt-5 pointer-events-auto border border-white/5 sm:border-r-0 animate-in fade-in zoom-in-95 duration-200">
       
       {/* Header */}
       <div className="flex justify-between items-start mb-6 md:mb-6">
