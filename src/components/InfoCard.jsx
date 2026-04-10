@@ -53,7 +53,7 @@ export default function InfoCard() {
       
       {/* Header */}
       <div className="flex justify-between items-start mb-6 md:mb-6">
-        <div className="flex flex-col gap-0.5 items-start">
+        <div className="flex flex-col gap-2 items-start">
            <span className="text-[38px] md:text-[44px] text-white font-antonio leading-none tracking-tight">{lText}</span>
            <div className="flex items-center gap-3 w-full">
               <span className="text-[18px] md:text-[20px] text-white font-open-sans-cond font-light opacity-90 leading-none">{mText}</span>
